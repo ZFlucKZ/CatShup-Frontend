@@ -49,7 +49,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="hero-image">
+        <div className="hero-image --flex-center">
           <img src={heroImg} alt="Cat" />
         </div>
       </section>
@@ -60,8 +60,8 @@ const Home = () => {
 const NumberText = ({ num, text }) => {
   return (
     <div className="--mr">
-      <h3 className="--color-white">{num}</h3>
-      <p className="--color-white">{text}</p>
+      <h3 className="--color-dark">{num}</h3>
+      <p className="--color-dark">{text}</p>
     </div>
   );
 };
