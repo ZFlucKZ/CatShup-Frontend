@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { validateEmail, registerUser } from '../../services/authService';
 import { useDispatch } from 'react-redux';
 import { SET_LOGIN, SET_NAME } from '../../redux/features/auth/authSlice';
+import Loader from '../../components/loader/Loader';
 
 const initialState = {
   name: '',
@@ -37,7 +38,7 @@ const Register = () => {
       return toast.error('Passwords must be up to 6 characters');
     }
     if (!validateEmail(email)) {
-      return toast.error('Please eenter a valid email');
+      return toast.error('Please enter a valid email');
     }
     if (password !== password2) {
       return toast.error('Passwords do not match');
@@ -65,6 +66,7 @@ const Register = () => {
 
   return (
     <div className={`container ${styles.auth}`}>
+      {isLoading && <Loader />}
       <Card>
         <div className={styles.form}>
           <div className="--flex-center">
