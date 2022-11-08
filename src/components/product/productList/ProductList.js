@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Loader, { SpinnerImg } from '../../loader/Loader';
 import './ProductList.scss';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
+import Search from '../../search/Search';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  FILTER_PRODUCTS,
+  selectFilteredProducts,
+} from '../../../redux/features/product/filterSlice';
 
 const ProductList = ({ products, isLoading }) => {
+  const [search, setSearch] = useState('');
+  const filteredProducts = useSelector(selectFilteredProducts);
+
+  const dispatch = useDispatch();
+
   const shortenText = (text, n) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat('...');
@@ -12,6 +23,10 @@ const ProductList = ({ products, isLoading }) => {
     }
     return text;
   };
+
+  useEffect(() => {
+    dispatch(FILTER_PRODUCTS({ products, search }));
+  }, [products, search, dispatch]);
 
   return (
     <div className="product-list">
@@ -22,7 +37,10 @@ const ProductList = ({ products, isLoading }) => {
             <h3>Inventory Items</h3>
           </span>
           <span>
-            <h3>Search products</h3>
+            <Search
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </span>
         </div>
 
@@ -46,7 +64,7 @@ const ProductList = ({ products, isLoading }) => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, index) => {
+                {filteredProducts.map((product, index) => {
                   const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
@@ -64,13 +82,13 @@ const ProductList = ({ products, isLoading }) => {
                       </td>
                       <td className="icons">
                         <span>
-                          <AiOutlineEye size={25} color={'purple'} />
+                          <AiOutlineEye size={19} color={'purple'} />
                         </span>
                         <span>
-                          <FaEdit size={25} color={'green'} />
+                          <FaEdit size={19} color={'green'} />
                         </span>
                         <span>
-                          <FaTrashAlt size={25} color={'red'} />
+                          <FaTrashAlt size={19} color={'red'} />
                         </span>
                       </td>
                     </tr>
