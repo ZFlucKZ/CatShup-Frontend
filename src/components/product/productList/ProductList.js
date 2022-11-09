@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Loader, { SpinnerImg } from '../../loader/Loader';
+import { SpinnerImg } from '../../loader/Loader';
 import './ProductList.scss';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
@@ -16,6 +16,7 @@ import {
   deleteProduct,
   getProducts,
 } from '../../../redux/features/product/productSlice';
+import { Link } from 'react-router-dom';
 
 const ProductList = ({ products, isLoading }) => {
   const [search, setSearch] = useState('');
@@ -125,7 +126,9 @@ const ProductList = ({ products, isLoading }) => {
                       </td>
                       <td className="icons">
                         <span>
-                          <AiOutlineEye size={19} color={'purple'} />
+                          <Link to={`/product-detail/${_id}`}>
+                            <AiOutlineEye size={19} color={'purple'} />
+                          </Link>
                         </span>
                         <span>
                           <FaEdit size={19} color={'green'} />
