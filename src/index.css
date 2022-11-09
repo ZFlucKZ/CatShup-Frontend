@@ -511,13 +511,13 @@ a:hover {
 }
 
 .pagination .page-num {
-  padding: 5px 10px;
+  padding: 5px 12px;
   cursor: pointer;
   border-radius: 3px;
   font-weight: normal;
   color: #333;
   border: 1px solid #333;
-  margin: 2px;
+  margin: 3px;
 }
 
 .pagination .page-num:hover {

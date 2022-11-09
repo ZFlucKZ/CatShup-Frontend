@@ -9,6 +9,7 @@ import {
   FILTER_PRODUCTS,
   selectFilteredProducts,
 } from '../../../redux/features/product/filterSlice';
+import ReactPaginate from 'react-paginate';
 
 const ProductList = ({ products, isLoading }) => {
   const [search, setSearch] = useState('');
@@ -23,6 +24,20 @@ const ProductList = ({ products, isLoading }) => {
     }
     return text;
   };
+
+  // Begin Pagination
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 3;
+  const endOffset = itemOffset + itemsPerPage;
+
+  const currentItems = filteredProducts.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
+    setItemOffset(newOffset);
+  };
+  // End Pagination
 
   useEffect(() => {
     dispatch(FILTER_PRODUCTS({ products, search }));
@@ -64,7 +79,7 @@ const ProductList = ({ products, isLoading }) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredProducts.map((product, index) => {
+                {currentItems.map((product, index) => {
                   const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
@@ -98,6 +113,20 @@ const ProductList = ({ products, isLoading }) => {
             </table>
           )}
         </div>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="Next"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel="Prev"
+          renderOnZeroPageCount={null}
+          containerClassName="pagination"
+          pageLinkClassName="page-num"
+          previousLinkClassName="page-num"
+          nextLinkClassName="page-num"
+          activeLinkClassName="activePage"
+        />
       </div>
     </div>
   );

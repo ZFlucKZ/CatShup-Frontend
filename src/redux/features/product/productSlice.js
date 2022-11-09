@@ -9,6 +9,9 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  totalStoreValue: 0,
+  outOfStock: 0,
+  categories: [],
 };
 
 // Create New Product
@@ -56,7 +59,40 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     CALC_STORE_VALUE(state, action) {
-      console.log('store value');
+      const products = action.payload;
+      const array = [];
+      products.map((product) => {
+        const { price, quantity } = product;
+        const productValue = price * quantity;
+        return array.push(productValue);
+      });
+      const TotalValue = array.reduce((a, b) => a + b, 0);
+      state.totalStoreValue = TotalValue;
+    },
+    CALC_OUTOFSTOCK(state, action) {
+      const products = action.payload;
+      const array = [];
+      products.map((product) => {
+        const { quantity } = product;
+        return array.push(quantity);
+      });
+      let count = 0;
+      array.forEach((number) => {
+        if (number === 0 || number === '0') {
+          count += 1;
+        }
+        state.outOfStock = count;
+      });
+    },
+    CALC_CATEGORY(state, action) {
+      const products = action.payload;
+      const array = [];
+      products.map((product) => {
+        const { category } = product;
+        return array.push(category);
+      });
+      const uniqueCategory = [...new Set(array)];
+      state.categories = uniqueCategory;
     },
   },
   extraReducers: (builder) => {
@@ -98,8 +134,12 @@ const productSlice = createSlice({
   },
 });
 
-export const { CALC_STORE_VALUE } = productSlice.actions;
+export const { CALC_STORE_VALUE, CALC_OUTOFSTOCK, CALC_CATEGORY } =
+  productSlice.actions;
 
 export const selectIsLoading = (state) => state.product.isLoading;
+export const selectTotalStoreValue = (state) => state.product.totalStoreValue;
+export const selectOutOfStock = (state) => state.product.outOfStock;
+export const selectCategory = (state) => state.product.categories;
 
 export default productSlice.reducer;
