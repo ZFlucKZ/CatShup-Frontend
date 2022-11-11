@@ -88,6 +88,7 @@ const ProductDetail = () => {
             <code className="--color-dark">
               Created on: {product.createdAt.toLocaleString('en-US')}
             </code>
+            <br />
             <code className="--color-dark">
               Last updated: {product.updatedAt.toLocaleString('en-US')}
             </code>

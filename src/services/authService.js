@@ -120,3 +120,57 @@ export const getLoginStatus = async (userData, resetToken) => {
     toast.error(message);
   }
 };
+
+// Get User Profile
+export const getUser = async () => {
+  try {
+    const res = await axios.get(`${BACKEND_URL}/api/users/getuser`);
+
+    return res.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    toast.error(message);
+  }
+};
+
+// Update Profile
+export const updateUser = async (formData) => {
+  try {
+    const res = await axios.patch(
+      `${BACKEND_URL}/api/users/updateuser`,
+      formData
+    );
+
+    return res.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    toast.error(message);
+  }
+};
+
+// Change Password
+export const changePassword = async (formData) => {
+  try {
+    const res = await axios.patch(
+      `${BACKEND_URL}/api/users/changepassword`,
+      formData
+    );
+
+    return res.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    toast.error(message);
+  }
+};
