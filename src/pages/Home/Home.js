@@ -37,22 +37,25 @@ const Home = () => {
       {/* Hero Section */}
       <section className="container hero">
         <div className="hero-text">
-          <h2>lorem lorem lorem lorem lorem lorem lorem</h2>
+          <h2>CatShup All-in-one Marketplace for pet life</h2>
           <p>
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-            lorem lorem lorem lorem
+            Labore dolore do aliquip dolore minim et ad sit ut mollit quis.
+            Velit cupidatat cupidatat sit laborum. Dolor ad mollit ullamco
+            voluptate voluptate labore. Elit non laborum anim dolor tempor et
+            commodo excepteur. Sit non enim officia in fugiat occaecat cupidatat
+            excepteur et velit sit. Voluptate incididunt sint qui reprehenderit
+            Lorem. Est ex proident aliqua enim. Est incididunt eiusmod
+            exercitation culpa.
           </p>
           <div className="hero-buttons">
             <button className="--btn --btn-secondary">
-              <Link to="/dashboard">Lorem</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </button>
           </div>
           <div className="--flex-start">
-            <NumberText num="1" text="lorem" />
-            <NumberText num="2" text="lorem" />
-            <NumberText num="3" text="lorem" />
+            <NumberText num="100K+" text="People" />
+            <NumberText num="100+" text="Shop" />
+            <NumberText num="10+" text="Hospital" />
           </div>
         </div>
 
