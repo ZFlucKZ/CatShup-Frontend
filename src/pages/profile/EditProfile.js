@@ -6,7 +6,7 @@ import Card from '../../components/card/Card';
 import ChangePassword from '../../components/changePassword/ChangePassword';
 import Loader from '../../components/loader/Loader';
 import { selectUser } from '../../redux/features/auth/authSlice';
-import { updateUser } from '../../services/authService';
+import { getUser, updateUser } from '../../services/authService';
 import './Profile.scss';
 
 const EditProfile = () => {
@@ -16,9 +16,18 @@ const EditProfile = () => {
   const { email } = user;
 
   useEffect(() => {
+    async function getUserData() {
+      const data = await getUser();
+      if (email !== data.email) {
+        navigate('/profile');
+      }
+    }
+
     if (!email) {
       navigate('/profile');
     }
+
+    getUserData();
   }, [email, navigate]);
 
   const initialState = {
